@@ -99,7 +99,7 @@ class TikaClient extends AbstractTikaClient {
 	 *
 	 * @throws Exception
 	 */
-	public function request($type, $file = null) {
+	protected function request($type, $file = null) {
 		
 		// parameters for cURL request
 		$headers = [];

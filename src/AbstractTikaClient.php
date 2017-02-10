@@ -47,7 +47,7 @@ abstract class AbstractTikaClient {
 	 *
 	 * @throws \Exception
 	 */
-	abstract public function request($type, $file);
+	abstract protected function request($type, $file);
 	
 	/**
 	 * Returns the current Apache Tika version.
