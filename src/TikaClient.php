@@ -122,10 +122,7 @@ class TikaClient extends AbstractTikaClient {
 		// base options
 		$options = $this->options;
 		
-		if ($file && preg_match('/^http/', $file)) {
-			// remote file options
-			$options[CURLOPT_INFILE] = fopen($file, 'r');
-		} elseif ($file && file_exists($file) && is_readable($file)) {
+        if ($file && file_exists($file) && is_readable($file)) {
 			// local file options
 			$options[CURLOPT_INFILE] = fopen($file, 'r');
 			$options[CURLOPT_INFILESIZE] = filesize($file);
