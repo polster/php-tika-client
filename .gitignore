@@ -2,7 +2,10 @@
 vendor
 composer.lock
 
-# Eclipse project
+# Eclipse projects
 .settings
 .project
 .buildpath
+
+# intellij projects
+.idea
