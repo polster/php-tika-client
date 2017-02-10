@@ -27,7 +27,7 @@ class TikaClient extends AbstractTikaClient {
 	 * @var int
 	 */
 	private $port = 9998;
-	
+
 	/**
 	 * cURL options.
 	 *
@@ -49,16 +49,13 @@ class TikaClient extends AbstractTikaClient {
 	 *
 	 * @throws Exception
 	 */
-	public function __construct($host = null, $port = null, $options = []) {
+	public function __construct($host = null, $port = null) {
 		
 		if ($host) {
 			$this->host = $host;
 		}
 		if ($port) {
 			$this->port = $port;
-		}
-		foreach ($options as $key => $value) {
-			$this->options[$key] = $value;
 		}
 	}
 	
@@ -83,12 +80,35 @@ class TikaClient extends AbstractTikaClient {
 	/**
 	 * Returns the configured extra options.
 	 *
-	 * @return null|array
+	 * @return array
 	 */
 	public function getOptions() {
 		return $this->options;
 	}
-	
+
+    /**
+     * Returns the client connection timeout in seconds.
+     *
+     * @return int
+     */
+    public function getConnectionTimeout() {
+        return $this->options[CURLOPT_TIMEOUT];
+    }
+
+    /**
+     * Sets the connection timeout in seconds.
+     *
+     * @param $connectionTimeout
+     * @throws Exception
+     */
+    public function setConnectionTimeout($connectionTimeout) {
+
+        if (!is_int($connectionTimeout) || $connectionTimeout < 0) {
+            throw new Exception("Given value must be a non negative integer!");
+        }
+        $this->options[CURLOPT_TIMEOUT] = $connectionTimeout;
+    }
+
 	/**
 	 * Configure and fire a request against the Tika Server and return the result.
 	 *

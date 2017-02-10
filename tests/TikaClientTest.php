@@ -26,7 +26,58 @@ class TikaClientTest extends TestCase {
 		$this->client = new TikaClient();
 		$this->testFilePath = dirname(__DIR__) . "/tests/test-files";
 	}
-	
+
+    /**
+     * See method name.
+     */
+	public function testShouldSetConnectionTimeout() {
+
+	    // given
+        $client = new TikaClient();
+
+        // when
+        $client->setConnectionTimeout(300);
+
+        // then
+        $this->assertEquals(300, $client->getConnectionTimeout());
+    }
+
+    /**
+     * See method name.
+     *
+     * @expectedException Exception
+     * @expectedExceptionMessage Given value must be a non negative integer!
+     */
+    public function testShouldSetConnectionTimeoutThrowExceptionIfStringValue() {
+
+        // given
+        $client = new TikaClient();
+
+        // when
+        $client->setConnectionTimeout("bad value");
+
+        // then
+        // expected exception
+    }
+
+    /**
+     * See method name.
+     *
+     * @expectedException Exception
+     * @expectedExceptionMessage Given value must be a non negative integer!
+     */
+    public function testShouldSetConnectionTimeoutThrowExceptionIfNegativeValue() {
+
+        // given
+        $client = new TikaClient();
+
+        // when
+        $client->setConnectionTimeout(-34);
+
+        // then
+        // expected exception
+    }
+
 	/**
 	 * See method name.
 	 */
@@ -86,7 +137,7 @@ class TikaClientTest extends TestCase {
 		// then
 		$this->assertContains("STAR	WARS", $text);
 	}
-	
+
 	/**
 	 * See method name.
 	 */
@@ -152,4 +203,5 @@ class TikaClientTest extends TestCase {
 		// then
 		// expected exception
 	}
+
 }
