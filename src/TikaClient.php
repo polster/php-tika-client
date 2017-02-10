@@ -67,7 +67,16 @@ class TikaClient extends AbstractTikaClient {
 	public function getHost() {
 		return $this->host;
 	}
-	
+
+    /**
+     * Sets the host.
+     *
+     * @param string $host
+     */
+	public function setHost($host) {
+	    $this->host = host;
+    }
+
 	/**
 	 * Returns the configured port.
 	 *
@@ -76,7 +85,16 @@ class TikaClient extends AbstractTikaClient {
 	public function getPort() {
 		return $this->port;
 	}
-	
+
+    /**
+     * Sets the port.
+     *
+     * @param int $port
+     */
+	public function setPort($port) {
+	    $this->port = $port;
+    }
+
 	/**
 	 * Returns the configured extra options.
 	 *
