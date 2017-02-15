@@ -74,7 +74,7 @@ class TikaClient extends AbstractTikaClient {
      * @param string $host
      */
 	public function setHost($host) {
-	    $this->host = host;
+	    $this->host = $host;
     }
 
 	/**
