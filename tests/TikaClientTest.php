@@ -3,6 +3,7 @@
 namespace polster\php\Tika\Tests;
 
 use polster\php\Tika\Client\TikaClient;
+use polster\php\Tika\Client\TikaClientException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -44,38 +45,46 @@ class TikaClientTest extends TestCase {
 
     /**
      * See method name.
-     *
-     * @expectedException Exception
-     * @expectedExceptionMessage Given value must be a non negative integer!
      */
     public function testShouldSetConnectionTimeoutThrowExceptionIfStringValue() {
 
         // given
         $client = new TikaClient();
 
-        // when
-        $client->setConnectionTimeout("bad value");
+        try {
 
-        // then
-        // expected exception
+            // when
+            $client->setConnectionTimeout("bad value");
+
+        } catch (TikaClientException $e) {
+
+            // then
+            $this->assertTrue(true);
+        }
+        $this->assertFalse(false, "Exception expected!");
+
     }
 
     /**
      * See method name.
-     *
-     * @expectedException Exception
-     * @expectedExceptionMessage Given value must be a non negative integer!
      */
     public function testShouldSetConnectionTimeoutThrowExceptionIfNegativeValue() {
 
         // given
         $client = new TikaClient();
 
-        // when
-        $client->setConnectionTimeout(-34);
+        try {
 
-        // then
-        // expected exception
+            // when
+            $client->setConnectionTimeout(-34);
+
+        } catch (TikaClientException $e) {
+
+            // then
+            $this->assertTrue(true);
+        }
+        $this->assertFalse(false, "Exception expected!");
+
     }
 
 	/**
@@ -170,38 +179,45 @@ class TikaClientTest extends TestCase {
 	
 	/**
 	 * See method name.
-	 * 
-	 * @expectedException Exception
 	 */
 	public function testShouldThrowExceptionIfNoFile() {
 		
 		// given
 		$file = $this->testFilePath . "/file-not-present.doc";
 
-		// when
-		$this->client->getText($file);
-			
-		// then
-		// expected exception
+		try {
+
+            // when
+            $this->client->getText($file);
+
+        } catch (TikaClientException $e) {
+
+		    // then
+            $this->assertTrue(true);
+        }
+        $this->assertFalse(false, "Exception expected!");
 	}
 	
 	/**
 	 * See method name.
-	 * 
-	 * @expectedException Exception
-	 * @expectedExceptionMessage Couldn't resolve host 'unknown-tika-server'
 	 */
 	public function testShouldThrowExceptionIfUnresolvableHost() {
 	
 		// given
 		$this->client = new TikaClient("unknown-tika-server");
 		$file = $this->testFilePath . "/test3.pdf";
-		
-		// when
-		$this->client->getText($file);
-		
-		// then
-		// expected exception
+
+		try {
+
+            // when
+            $this->client->getText($file);
+
+        } catch (TikaClientException $e) {
+
+            // then
+            $this->assertTrue(true);
+        }
+        $this->assertFalse(false, "Exception expected!");
 	}
 
 }

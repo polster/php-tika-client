@@ -18,7 +18,7 @@ abstract class AbstractTikaClient {
 	 *
 	 * @return string
 	 *
-	 * @throws \Exception
+	 * @throws \TikaClientException
 	 */
 	public function getText($file) {
 		return $this->request('text', $file);
@@ -31,7 +31,7 @@ abstract class AbstractTikaClient {
 	 *
 	 * @return string
 	 *
-	 * @throws \Exception
+	 * @throws \TikaClientException
 	 */
 	public function getHTML($file) {
 		return $this->request('html', $file);
@@ -45,7 +45,7 @@ abstract class AbstractTikaClient {
 	 *
 	 * @return string
 	 *
-	 * @throws \Exception
+	 * @throws \TikaClientException
 	 */
 	abstract protected function request($type, $file);
 	

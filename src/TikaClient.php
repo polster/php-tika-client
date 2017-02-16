@@ -4,6 +4,7 @@ namespace polster\php\Tika\Client;
 
 use Exception;
 use polster\php\Tika\Client\AbstractTikaClient;
+use polster\php\Tika\Client\TikaClientException;
 
 /**
  * Apache Tika Client implementation.
@@ -117,12 +118,12 @@ class TikaClient extends AbstractTikaClient {
      * Sets the connection timeout in seconds.
      *
      * @param $connectionTimeout
-     * @throws Exception
+     * @throws TikaClientException
      */
     public function setConnectionTimeout($connectionTimeout) {
 
         if (!is_int($connectionTimeout) || $connectionTimeout < 0) {
-            throw new Exception("Given value must be a non negative integer!");
+            throw new TikaClientException("Given value must be a non negative integer!");
         }
         $this->options[CURLOPT_TIMEOUT] = $connectionTimeout;
     }
@@ -135,7 +136,7 @@ class TikaClient extends AbstractTikaClient {
 	 *
 	 * @return string
 	 *
-	 * @throws Exception
+	 * @throws TikaClientException
 	 */
 	protected function request($type, $file = null) {
 		
@@ -154,7 +155,7 @@ class TikaClient extends AbstractTikaClient {
 				$resource = 'version';
 				break;
 			default:
-				throw new Exception("Unknown type $type");
+				throw new TikaClientException("Unknown type $type");
 		}
 		
 		// base options
@@ -169,7 +170,7 @@ class TikaClient extends AbstractTikaClient {
 			$options[CURLOPT_PUT] = false;
 		} else {
 			// error
-			throw new Exception("File $file can't be opened");
+			throw new TikaClientException("File $file can't be opened");
 		}
 		
 		// sets headers
@@ -194,7 +195,7 @@ class TikaClient extends AbstractTikaClient {
 	 *
 	 * @return array
 	 *
-	 * @throws Exception
+	 * @throws TikaClientException
 	 */
 	private function exec(array $options = []) {
 		
@@ -210,35 +211,34 @@ class TikaClient extends AbstractTikaClient {
 		];
 
 		if (curl_errno($curl)) {
-			throw new Exception(curl_error($curl), curl_errno($curl));
+			throw new TikaClientException(curl_error($curl), curl_errno($curl));
 		}
-		
-		
+
 		return $response;
 	}
 	
 	/**
-	 * Throws an Exception reflecting the given status.
+	 * Throws a TikaClientException reflecting the given status.
 	 *
 	 * @param int       $status
 	 * @param string    $resource
 	 *
-	 * @throws Exception
+	 * @throws TikaClientException
 	 */
 	private function error($status, $resource) {
 		
 		switch ($status) {
 			case 405:
-				throw new Exception('Method not allowed', 405);
+				throw new TikaClientException('Method not allowed', 405);
 				break;
 			case 422:
-				throw new Exception('Unprocessable document', 422);
+				throw new TikaClientException('Unprocessable document', 422);
 				break;
 			case 500:
-				throw new Exception('Error while processing document', 500);
+				throw new TikaClientException('Error while processing document', 500);
 				break;
 			default:
-				throw new Exception("Unexpected response for /$resource ($status)", 501);
+				throw new TikaClientException("Unexpected response for /$resource ($status)", 501);
 		}
 	}
 }
