@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+
+  tika-server:
+    image: polster/docker-tika
+    container_name: php-tika-server
+    ports:
+      - "9998:9998"
