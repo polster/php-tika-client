@@ -9,3 +9,6 @@ composer.lock
 
 # intellij projects
 .idea
+
+# PHPDoc
+docs
