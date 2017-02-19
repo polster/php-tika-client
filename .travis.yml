@@ -6,8 +6,15 @@ php:
 services:
   - docker
 
+addons:
+  code_climate:
+    repo_token: a0f04600733725adb53e72d9386ad0ba3a165efcea8740e8975d4d298fb40a45
+
 before_install:
   - docker-compose up -d
 
 install:
   - composer install --no-interaction
+
+after_success:
+  - vendor/bin/test-reporter
