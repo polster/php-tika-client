@@ -2,6 +2,9 @@ Apache Tika Client for PHP
 ==========================
 
 [![Build Status](https://travis-ci.org/polster/php-tika-client.svg?branch=master)](https://travis-ci.org/polster/php-tika-client)
+[![Code Climate](https://lima.codeclimate.com/github/polster/php-tika-client/badges/gpa.svg)](https://lima.codeclimate.com/github/polster/php-tika-client)
+[![Test Coverage](https://lima.codeclimate.com/github/polster/php-tika-client/badges/coverage.svg)](https://lima.codeclimate.com/github/polster/php-tika-client/coverage)
+[![Issue Count](https://lima.codeclimate.com/github/polster/php-tika-client/badges/issue_count.svg)](https://lima.codeclimate.com/github/polster/php-tika-client)
 
 ## Purpose
 
